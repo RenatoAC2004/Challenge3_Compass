@@ -29,7 +29,7 @@ const Navbar = () => {
     <header className={`fixed w-full h-[6.25rem] py-7 px-2 bg-white flex justify-between items-center transition-all 
     sm:px-7 md:px-8 lg:px-14 ${ scrolled ? "border-b border-gray-300 shadow-lg" : ""}`}>
       <div className="flex items-center gap-x-1">
-        <img src="src\assets\icons\Logo.svg" alt="Logo" />
+        <img src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/LogoIcon.svg" alt="Logo" />
         <p className="font-montserrat font-bold text-4xl">Furniro</p>
       </div>
       <div className="hidden md:flex gap-x-7 lg:gap-x-[4.688rem] font-poppins font-medium">
@@ -41,10 +41,10 @@ const Navbar = () => {
 
       <div className="hidden md:flex gap-x-9 pr-12">
         <button>
-          <img src="src\assets\icons\UserIcon.svg" alt="UserIcon" />
+          <img src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/UserIcon.svg" alt="UserIcon" />
         </button>
         <button>
-          <img src="src\assets\icons\CartIcon.svg" alt="CartIcon" />
+          <img src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/CartIcon.svg" alt="CartIcon" />
         </button>
       </div>
 
@@ -54,12 +54,13 @@ const Navbar = () => {
       >
         {menuOpen ? (
           <img
-            src="src\assets\icons\CloseIcon.svg"
+            src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/CloseIcon.svg"
             alt="Close Menu Icon"
+            className="w-8"
           />
         ) : (
           <img
-            src="src\assets\icons\HamburgerIcon.svg"
+            src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/HamburgerIcon.svg"
             alt="Hamburguer Menu Icon"
           />
         )}
@@ -111,11 +112,11 @@ const Navbar = () => {
         <div className="flex gap-x-9 justify-center py-4">
           <button className="flex w-12 h-12 bg-white rounded-full items-center justify-center shadow-black shadow-sm transition-all
           hover:bg-Golden">
-            <img src="src\assets\icons\UserIcon.svg" alt="UserIcon" />
+            <img src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/UserIcon.svg" alt="UserIcon" />
           </button>
           <button className="flex w-12 h-12 bg-white rounded-full items-center justify-center shadow-black shadow-sm transition-all
           hover:bg-Golden">
-            <img src="src\assets\icons\CartIcon.svg" alt="CartIcon" />
+            <img src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/CartIcon.svg" alt="CartIcon" />
           </button>
         </div>
       </div>

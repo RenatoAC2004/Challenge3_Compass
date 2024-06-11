@@ -2,7 +2,7 @@ const HeroSection = () => {
   return (
     <>
       <section
-        className="flex items-center justify-center lg:justify-end h-screen bg-[url('src/assets/heroImage.png')] bg-cover 
+        className="flex items-center justify-center lg:justify-end h-screen bg-[url('https://furniro-images-s3.s3.us-east-2.amazonaws.com/images/homepage/heroImage.png')] bg-cover 
       bg-no-repeat bg-center pt-[6.25rem]"
       >
         <div
