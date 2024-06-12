@@ -19,7 +19,7 @@ const Footer = () => {
           </p>
           <div className="flex gap-x-4">
             <Link
-              to="/"
+              to="https://www.facebook.com/"
               target="_blank"
               className="flex justify-center items-center rounded-full shadow-FooterLightGray shadow-lg w-8 h-8 
               transition-all hover:bg-[#1877F2]"
@@ -30,7 +30,7 @@ const Footer = () => {
               />
             </Link>
             <Link
-              to="/"
+              to="https://www.instagram.com/"
               target="_blank"
               className="flex justify-center items-center rounded-full shadow-FooterLightGray shadow-lg w-8 h-8
               transition-all hover:bg-[#C13584]"
@@ -41,7 +41,7 @@ const Footer = () => {
               />
             </Link>
             <Link
-              to="/"
+              to="https://x.com/"
               target="_blank"
               className="flex justify-center items-center rounded-full shadow-FooterLightGray shadow-lg w-8 h-8
               transition-all hover:bg-[#1DA1F2]"
@@ -52,7 +52,7 @@ const Footer = () => {
               />
             </Link>
             <Link
-              to="/"
+              to="https://www.linkedin.com/"
               target="_blank"
               className="flex justify-center items-center rounded-full shadow-FooterLightGray shadow-lg w-8 h-8
               transition-all hover:bg-[#0A66C2]"
