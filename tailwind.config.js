@@ -19,6 +19,7 @@ export default {
         CardBackground: "#F4F5F7",
         DiscountTag: "#E97171",
         NewTag: "#2EC1AC",
+        FooterLightGray: "#9F9F9F",
       },
     },
   },

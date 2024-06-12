@@ -26,7 +26,7 @@ const ProductsSection = () => {
   return (
     <section className="h-fit flex flex-col items-center text-center font-poppins px-4 pb-14 sm:px-12 lg:px-16 xl:px-20">
       <h1 className="text-4xl font-bold text-TitlesColor pb-10">Our Products</h1>
-      <div className="hidden 2xl:flex flex-col gap-y-8">
+      <div className="hidden 2xl:flex flex-col gap-y-8 pb-8">
         <ProductCard data={firstRow} />
         <ProductCard data={secondRow} />
       </div>
