@@ -26,7 +26,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header className={`fixed w-full h-[6.25rem] py-7 px-2 bg-white flex justify-between items-center transition-all 
+    <header className={`fixed w-full h-[6.25rem] py-7 px-2 bg-white flex justify-between items-center transition-all z-30
     sm:px-7 md:px-8 lg:px-14 ${ scrolled ? "border-b border-gray-300 shadow-lg" : ""}`}>
       <div className="flex items-center gap-x-1">
         <img src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/LogoIcon.svg" alt="Logo" />
