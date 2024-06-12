@@ -11,11 +11,11 @@ const HeroSection = () => {
           lg:mr-14"
         >
           <div>
-            <p className="font-semibold tracking-[0.188rem]">New Arrival</p>
+            <p className="font-semibold tracking-[0.188rem] text-TitlesColor">New Arrival</p>
             <h1 className="font-bold text-Golden text-4xl text-center sm:leading-[4.063rem] py-5 sm:text-[3.25rem] sm:text-left">
               Discover Our <br/> New Collection
             </h1>
-            <p className="text-lg font-medium text-justify sm:text-left">
+            <p className="text-lg font-medium text-justify text-TitlesColor sm:text-left">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
               tellus, luctus nec ullamcorper mattis.
             </p>

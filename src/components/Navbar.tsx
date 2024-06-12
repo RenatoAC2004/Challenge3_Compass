@@ -67,7 +67,7 @@ const Navbar = () => {
       </button>
 
       <div
-        className={`block fixed top-0 bg-LighterBeige h-screen transition-all ease-in-out w-64 md:hidden z-30 shadow-black shadow-lg ${
+        className={`block fixed top-0 bg-LighterBeige h-screen transition-all ease-in-out w-64 md:hidden z-50 shadow-black shadow-lg ${
           menuOpen ? "left-0" : "-left-full"
         }`}
       >

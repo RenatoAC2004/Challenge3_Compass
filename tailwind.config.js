@@ -12,6 +12,8 @@ export default {
         LightBeige: "#FAF3EA",
         Beige: "#FFF3E3",
         Golden: "#B88E2F",
+        TitlesColor: "#333333",
+        TextColor:"#666666",
       },
     },
   },
