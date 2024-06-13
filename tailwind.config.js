@@ -20,6 +20,7 @@ export default {
         DiscountTag: "#E97171",
         NewTag: "#2EC1AC",
         FooterLightGray: "#9F9F9F",
+        CarouselSectionBg: "#FCF8F3"
       },
     },
   },
