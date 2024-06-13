@@ -34,7 +34,7 @@ const Navbar = () => {
       </div>
       <div className="hidden md:flex gap-x-7 lg:gap-x-[4.688rem] font-poppins font-medium">
         <Link to="/">Home</Link>
-        <Link to="/">Shop</Link>
+        <Link to="/shop">Shop</Link>
         <Link to="/">About</Link>
         <Link to="/">Contact</Link>
       </div>
@@ -87,7 +87,7 @@ const Navbar = () => {
             Home
           </Link>
           <Link
-            to="/"
+            to="/shop"
             className="py-2 mx-2 border border-transparent rounded-md bg-white shadow-neutral-600 shadow-sm transition-all 
             hover:text-white hover:bg-Golden"
           >
