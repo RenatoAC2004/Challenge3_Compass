@@ -49,7 +49,7 @@ const BrowseSection = () => {
         modules={[Autoplay, Pagination]}
         autoplay={{
           delay: 2500,
-          disableOnInteraction: true,
+          disableOnInteraction: false,
         }}
         loop={true}
       >
