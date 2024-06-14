@@ -1,24 +1,22 @@
-import { useEffect, useState } from "react";
-import ProductCard from "../../../components/ProductCard";
-import axios from "axios";
-import ButtonBorder from "../../../components/ButtonBorder";
+import ProductCard from '../../../components/ProductCard';
+import ButtonBorder from '../../../components/ButtonBorder';
+import { fetchProducts } from '../../../store/products/actions';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { selectProducts } from '../../../store/products/reducer';
+import { MyThunkDispatch } from '../../../store';
+
 
 const ProductsSection = () => {
-  const [products, setProducts] = useState([]);
+  const dispatch = useDispatch<MyThunkDispatch>()
+  const {products} = useSelector(selectProducts)
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "https://run.mocky.io/v3/cfa9cabe-0dcf-4cb0-aef1-0603244a224c"
-        );
-        setProducts(response.data["products"]);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchData();
-  }, []);
+    dispatch(fetchProducts());
+  }, [dispatch]);
+  
+
 
   const firstRow = products.slice(0, 4);
   const secondRow = products.slice(4, 8);
@@ -31,9 +29,9 @@ const ProductsSection = () => {
         <ProductCard data={secondRow} />
       </div>
       <div className="2xl:hidden flex flex-col gap-y-8 pb-8">
-        <ProductCard data={products}/>
+        <ProductCard data={products} />
       </div>
-      <ButtonBorder text="Show More"/>
+      <ButtonBorder text="Show More" />
     </section>
   );
 };
