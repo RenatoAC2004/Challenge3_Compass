@@ -7,16 +7,13 @@ import { useSelector } from 'react-redux';
 import { selectProducts } from '../../../store/products/reducer';
 import { MyThunkDispatch } from '../../../store';
 
-
 const ProductsSection = () => {
-  const dispatch = useDispatch<MyThunkDispatch>()
-  const {products} = useSelector(selectProducts)
+  const dispatch = useDispatch<MyThunkDispatch>();
+  const { products } = useSelector(selectProducts);
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
-  
-
 
   const firstRow = products.slice(0, 4);
   const secondRow = products.slice(4, 8);
@@ -24,12 +21,15 @@ const ProductsSection = () => {
   return (
     <section className="h-fit flex flex-col items-center text-center font-poppins px-4 pb-14 sm:px-12 lg:px-16 xl:px-20">
       <h1 className="text-4xl font-bold text-TitlesColor pb-10">Our Products</h1>
-      <div className="hidden 2xl:flex flex-col gap-y-8 pb-8">
-        <ProductCard data={firstRow} />
-        <ProductCard data={secondRow} />
+      <div className="flex flex-wrap justify-center gap-8 pb-8">
+        {firstRow.map((product) => (
+          <ProductCard key={product.id} data={[product]} />
+        ))}
       </div>
-      <div className="2xl:hidden flex flex-col gap-y-8 pb-8">
-        <ProductCard data={products} />
+      <div className="flex flex-wrap justify-center gap-8 pb-8">
+        {secondRow.map((product) => (
+          <ProductCard key={product.id} data={[product]} />
+        ))}
       </div>
       <ButtonBorder text="Show More" />
     </section>

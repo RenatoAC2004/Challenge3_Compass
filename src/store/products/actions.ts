@@ -15,7 +15,7 @@ export const fetchProducts = () => {
     dispatch({ type: FETCH_PRODUCTS_REQUEST })
     try {
       const response = await axios.get(
-        "https://run.mocky.io/v3/cfa9cabe-0dcf-4cb0-aef1-0603244a224c"
+        "https://run.mocky.io/v3/204aceac-7b21-4b2a-8c9a-eecc64d44357"
       )
       return dispatch({
         type: FETCH_PRODUCTS_SUCCESS,

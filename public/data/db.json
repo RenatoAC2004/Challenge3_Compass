@@ -71,6 +71,78 @@
       "discount": 0,
       "imageUrl": "https://furniro-images-s3.s3.us-east-2.amazonaws.com/images/products/productPotty.png",
       "new": true
+    },
+    {
+      "id": "9",
+      "name": "Syltherine",
+      "description": "Stylish cafe chair",
+      "price": 2500000,
+      "discount": 1000000,
+      "imageUrl": "https://furniro-images-s3.s3.us-east-2.amazonaws.com/images/products/productSlytherine.png",
+      "new": false
+    },
+    {
+      "id": "10",
+      "name": "Leviosa",
+      "description": "Stylish cafe chair",
+      "price": 2500000,
+      "discount": 0,
+      "imageUrl": "https://furniro-images-s3.s3.us-east-2.amazonaws.com/images/products/productLeviosa.png",
+      "new": false
+    },
+    {
+      "id": "11",
+      "name": "Lolito",
+      "description": "Luxury big sofa",
+      "price": 7000000,
+      "discount": 7000000,
+      "imageUrl": "https://furniro-images-s3.s3.us-east-2.amazonaws.com/images/products/productLolito.png",
+      "new": false
+    },
+    {
+      "id": "12",
+      "name": "Respira",
+      "description": "Outdoor bar table and stool",
+      "price": 500000,
+      "discount": 0,
+      "imageUrl": "https://furniro-images-s3.s3.us-east-2.amazonaws.com/images/products/productRespira.png",
+      "new": true
+    },
+    {
+      "id": "13",
+      "name": "Grifo",
+      "description": "Night lamp",
+      "price": 1500000,
+      "discount": 0,
+      "imageUrl": "https://furniro-images-s3.s3.us-east-2.amazonaws.com/images/products/productGrifo.png",
+      "new": false
+    },
+    {
+      "id": "14",
+      "name": "Muggo",
+      "description": "Small mug",
+      "price": 150000,
+      "discount": 0,
+      "imageUrl": "https://furniro-images-s3.s3.us-east-2.amazonaws.com/images/products/productMuggo.png",
+      "new": true
+    },
+    {
+      "id": "15",
+      "name": "Pingky",
+      "description": "Cute bed set",
+      "price": 7000000,
+      "discount": 7000000,
+      "imageUrl": "https://furniro-images-s3.s3.us-east-2.amazonaws.com/images/products/productPingky.png",
+      "new": false
+    },
+    {
+      "id": "16",
+      "name": "Potty",
+      "description": "Minimalist flower pot",
+      "price": 500000,
+      "discount": 0,
+      "imageUrl": "https://furniro-images-s3.s3.us-east-2.amazonaws.com/images/products/productPotty.png",
+      "new": true
     }
   ]
 }
