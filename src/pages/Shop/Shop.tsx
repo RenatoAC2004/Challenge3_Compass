@@ -5,6 +5,7 @@ import { fetchProducts } from "../../store/products/actions";
 import { useEffect } from "react";
 import { UnknownAction } from "redux";
 import ProductCard from "../../components/ProductCard";
+import Services from "../../components/Services";
 
 const Shop = () => {
   const dispatch = useDispatch()
@@ -60,6 +61,8 @@ const Shop = () => {
       <section className="h-full py-16">
       <ProductCard data={products}/>
       </section>
+      
+      <Services/>
     </>
   )
 }
