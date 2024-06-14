@@ -7,10 +7,6 @@ export type RootState = ReturnType<typeof rootReducer>
 export type MyThunkResult<R> = ThunkAction<R, RootState, object, Action>
 export type MyThunkDispatch = ThunkDispatch<RootState, object, Action>
 
-// interface RootReducer {
-//     product: InitialState
-// }
-
 const rootReducer = combineReducers({
   product: productsReducer,
 })
