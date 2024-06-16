@@ -1,11 +1,16 @@
 import React from "react";
 import { ProductTypeProps } from "../types/ProductTypeProps";
 import ButtonBorder from "./ButtonBorder";
+import { ProductType } from "../types/ProductType";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard: React.FC<ProductTypeProps> = ({ data }) => {
-  const handleClick = (productId: string) => {
-    window.location.href = `/product/${productId}`;
+  const navigate = useNavigate();
+
+  const handleClick = (product: ProductType) => {
+    navigate(`/product/${product.id}`, { state: { product } });
   };
+  
 
   const handleAddToCartClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.stopPropagation();
@@ -17,7 +22,7 @@ const ProductCard: React.FC<ProductTypeProps> = ({ data }) => {
         <div
           key={product.id}
           className="relative w-[17.813rem] h-[27.813rem] bg-CardBackground transition-all overflow-hidden group cursor-pointer"
-          onClick={() => handleClick(product.id)}
+          onClick={() => handleClick(product)}
         >
           {product.new && (
             <div className="absolute top-2 right-2 w-12 h-12 bg-NewTag rounded-full">

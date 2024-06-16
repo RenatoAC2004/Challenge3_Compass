@@ -6,4 +6,5 @@ export interface ProductType {
     discount: number
     imageUrl: string
     new: boolean
+    rating: number
   }
