@@ -48,7 +48,7 @@ const SingleProductSection = () => {
 
   return (
     <section
-      className="flex flex-col h-fit py-9 font-poppins 
+      className="flex flex-col h-fit py-9 font-poppins border-b border-[#D9D9D9]
     lg:px-9 lg:flex-row xl:px-[6.25rem] "
     >
       <div
@@ -85,7 +85,10 @@ const SingleProductSection = () => {
         </div>
       </div>
 
-      <div className="w-full flex flex-col px-4 pt-8 lg:px-0 lg:pt-0 lg:justify-center">
+      <div
+        className="w-full flex flex-col px-4 pt-8 items-center 
+      lg:px-0 lg:pt-0 lg:justify-center lg:items-start"
+      >
         <p className="text-[2.625rem]">{product.name}</p>
         <p className="font-medium text-2xl text-FooterLightGray pb-[1.125rem]">
           Rs. {product.price.toLocaleString()}
@@ -181,16 +184,16 @@ const SingleProductSection = () => {
                 />
               </Link>
               <Link to="https://www.linkedin.com/" target="_blank">
-              <img
-                src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/LinkedinIconFill.svg"
-                alt="Linkedin Icon"
-              />
+                <img
+                  src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/LinkedinIconFill.svg"
+                  alt="Linkedin Icon"
+                />
               </Link>
               <Link to="https://x.com/" target="_blank">
-              <img
-                src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/TwitterIconFill.svg"
-                alt="Twitter Icon"
-              />
+                <img
+                  src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/TwitterIconFill.svg"
+                  alt="Twitter Icon"
+                />
               </Link>
             </div>
           </div>

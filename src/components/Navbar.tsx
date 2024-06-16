@@ -73,7 +73,7 @@ const Navbar = () => {
       >
         <div className="flex flex-col justify-center h-[6.25rem] px-4">
           <div className="flex items-center gap-x-1 p-2 rounded-2xl bg-white border shadow-Golden shadow-sm">
-            <img src="src\assets\icons\Logo.svg" alt="Logo" />
+            <img src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/LogoIcon.svg" alt="Logo" />
             <p className="font-montserrat font-bold text-4xl">Furniro</p>
           </div>
         </div>
