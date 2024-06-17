@@ -1,30 +1,38 @@
-# React + TypeScript + Vite
+<div align="center">
+<h1><b>Challenge 3 - Compass</b></h1>
+</div>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 💻 About the project
 
-Currently, two official plugins are available:
+<section>⚔️ Proposed by the company <a href="https://compass.uol/pt/home">Compass UOL</a> to fulfill the third challenge of the Front-end study track.</section>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ⚙️ How to run
 
-## Expanding the ESLint configuration
+<section>👉 Make sure you have the <a href="https://nodejs.org/en">Node.js</a> software to execute the commands;</section>
+<section>👉 Download this repository <b>on your local machine</b>;</section>
+<section>👉 Open your terminal and run the following commands to <b>install all code dependencies</b></section>
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+    npm i
 
-- Configure the top-level `parserOptions` property like this:
+<section>👉 Run the command "npm run dev" and click on the link that appears: </section>
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+    VITE v5.2.11  ready in 959 ms
+    ➜  Local:   http://localhost:5173/
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## 🛠️ Technologies
+
+<div align="center">
+<img src="https://skillicons.dev/icons?i=html,ts,react,tailwindcss,git,figma" />
+<img src="https://skillicons.dev/icons?i=nodejs,aws,firebase,redux,jest,vite">
+</div>
+
+## 👨‍💻 Contributors
+
+<div>
+<a href="https://github.com/RenatoAC2004" title="Renato Carvalho">
+<img src="https://avatars.githubusercontent.com/u/108144847?v=4" width="110px" alt="Foto de Renato Carvalho"/>
+  <p>
+    <b>Renato Carvalho</b>
+  </p>
+</a>
+</div>
