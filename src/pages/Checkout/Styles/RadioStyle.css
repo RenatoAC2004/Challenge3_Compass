@@ -1,0 +1,16 @@
+.radio-input input[type="radio"] {
+  position: relative;
+  appearance: none;
+  cursor: pointer;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #9F9F9F;
+  border-radius: 50%;
+  margin-right: 8px;
+  transition: all 0.2s ease-in-out
+}
+
+.radio-input input[type="radio"]:checked{
+    border: 0;
+    background-color: #333;
+}

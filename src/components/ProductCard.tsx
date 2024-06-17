@@ -41,12 +41,12 @@ const ProductCard: React.FC<ProductTypeProps> = ({ data }) => {
           <img className="mb-4" src={product.imageUrl} alt={product.name} />
           <div className="flex flex-col gap-y-2 px-4 text-left">
             <p className="font-semibold text-2xl text-CardTitleColor">{product.name}</p>
-            <p className="text-CardTextColor">{product.description}</p>
-            <p className="flex gap-x-4 items-center text-CardTitleColor font-semibold text-xl">
+            <p className="text-CardTextColor truncate">{product.description}</p>
+            <p className="flex gap-x-3 items-center text-CardTitleColor font-semibold text-xl">
               Rp {product.price.toLocaleString()}
               {product.discount !== 0 ? (
                 <span className="font-normal text-base text-[#B0B0B0] line-through">
-                  Rp{(product.discount + product.price).toLocaleString()}
+                  Rp {(product.discount + product.price).toLocaleString()}
                 </span>
               ) : (
                 ""
