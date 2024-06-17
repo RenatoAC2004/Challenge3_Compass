@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { useAuth } from "../contexts/AuthContext"
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(false)
+  const { userLoggedIn, signOut } = useAuth()
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen)
@@ -12,24 +14,31 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
-        setScrolled(true);
+        setScrolled(true)
       } else {
-        setScrolled(false);
+        setScrolled(false)
       }
-    };
+    }
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll)
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
 
   return (
-    <header className={`fixed w-full h-[6.25rem] py-7 px-2 bg-white flex justify-between items-center transition-all z-30
-    sm:px-7 md:px-8 lg:px-14 ${ scrolled ? "border-b border-gray-300 shadow-lg" : ""}`}>
+    <header
+      className={`fixed w-full h-[6.25rem] py-7 px-2 bg-white flex justify-between items-center transition-all z-30
+    sm:px-7 md:px-8 lg:px-14 ${
+      scrolled ? "border-b border-gray-300 shadow-lg" : ""
+    }`}
+    >
       <div className="flex items-center gap-x-1">
-        <img src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/LogoIcon.svg" alt="Logo" />
+        <img
+          src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/LogoIcon.svg"
+          alt="Logo"
+        />
         <p className="font-montserrat font-bold text-4xl">Furniro</p>
       </div>
       <div className="hidden md:flex gap-x-7 lg:gap-x-[4.688rem] font-poppins font-medium">
@@ -40,11 +49,24 @@ const Navbar = () => {
       </div>
 
       <div className="hidden md:flex gap-x-9 pr-12">
+        {userLoggedIn ? (
+          <button onClick={signOut} className="ml-4">
+            Logout
+          </button>
+        ) : (
+          <Link to={"/login"}>
+            <img
+              src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/UserIcon.svg"
+              alt="UserIcon"
+            />
+          </Link>
+        )}
+
         <button>
-          <img src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/UserIcon.svg" alt="UserIcon" />
-        </button>
-        <button>
-          <img src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/CartIcon.svg" alt="CartIcon" />
+          <img
+            src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/CartIcon.svg"
+            alt="CartIcon"
+          />
         </button>
       </div>
 
@@ -73,7 +95,10 @@ const Navbar = () => {
       >
         <div className="flex flex-col justify-center h-[6.25rem] px-4">
           <div className="flex items-center gap-x-1 p-2 rounded-2xl bg-white border shadow-Golden shadow-sm">
-            <img src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/LogoIcon.svg" alt="Logo" />
+            <img
+              src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/LogoIcon.svg"
+              alt="Logo"
+            />
             <p className="font-montserrat font-bold text-4xl">Furniro</p>
           </div>
         </div>
@@ -110,14 +135,34 @@ const Navbar = () => {
         </div>
 
         <div className="flex gap-x-9 justify-center py-4">
-          <button className="flex w-12 h-12 bg-white rounded-full items-center justify-center shadow-black shadow-sm transition-all
-          hover:bg-Golden">
-            <img src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/UserIcon.svg" alt="UserIcon" />
+
+        {userLoggedIn ? (
+          <button onClick={signOut} className="ml-4">
+            Logout
           </button>
-          <button className="flex w-12 h-12 bg-white rounded-full items-center justify-center shadow-black shadow-sm transition-all
+        ) : (
+          <Link to={"/login"} className="flex w-12 h-12 bg-white rounded-full items-center justify-center shadow-black shadow-sm transition-all
           hover:bg-Golden">
-            <img src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/CartIcon.svg" alt="CartIcon" />
+            <img
+              src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/UserIcon.svg"
+              alt="UserIcon"
+            />
+          </Link>
+        )}
+          <button
+            className="flex w-12 h-12 bg-white rounded-full items-center justify-center shadow-black shadow-sm transition-all
+          hover:bg-Golden"
+          >
+            <img
+              src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/CartIcon.svg"
+              alt="CartIcon"
+            />
           </button>
+          {userLoggedIn && (
+            <button onClick={signOut} className="ml-4">
+              Logout
+            </button>
+          )}
         </div>
       </div>
     </header>
