@@ -1,11 +1,20 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
+import { RootState } from "../store"
+import { useSelector } from "react-redux"
+import CartOverlay from "./CartOverlay"
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { userLoggedIn, signOut } = useAuth()
+  const [showCartOverlay, setShowCartOverlay] = useState(false);
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+
+  const toggleCartOverlay = () => {
+    setShowCartOverlay(!showCartOverlay);
+  };
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen)
@@ -62,7 +71,7 @@ const Navbar = () => {
           </Link>
         )}
 
-        <button>
+        <button onClick={toggleCartOverlay}>
           <img
             src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/CartIcon.svg"
             alt="CartIcon"
@@ -165,6 +174,7 @@ const Navbar = () => {
           )}
         </div>
       </div>
+      {showCartOverlay && <CartOverlay items={cartItems} onClose={toggleCartOverlay} />}
     </header>
   )
 }

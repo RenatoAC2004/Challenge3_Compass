@@ -1,20 +1,6 @@
-import { FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_FAILURE } from "./actions"
+import { FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_FAILURE, ProductsActionTypes } from "./actions"
 import { ProductType } from "../../types/ProductType"
-import { RootState } from ".."
-
-export interface FetchProductsSuccessAction {
-  type: typeof FETCH_PRODUCTS_SUCCESS
-  payload: ProductType[]
-}
-
-export interface FetchProductsFailureAction {
-  type: typeof FETCH_PRODUCTS_FAILURE
-  payload: string
-}
-
-export type ProductsActionTypes =
-  | FetchProductsSuccessAction
-  | FetchProductsFailureAction
+import { RootReducer } from ".."
 
 export interface InitialState {
   products: ProductType[]
@@ -26,7 +12,7 @@ const initialState: InitialState = {
   error: null,
 }
 
-const productsReducer = (state = initialState, action: ProductsActionTypes) => {
+const productsReducer = (state = initialState, action:ProductsActionTypes) => {
   switch (action.type) {
     case FETCH_PRODUCTS_SUCCESS:
       return {
@@ -44,6 +30,6 @@ const productsReducer = (state = initialState, action: ProductsActionTypes) => {
   }
 }
 
-export const selectProducts = (state: RootState) => state.product
+export const selectProducts = (state: RootReducer) => state.product
 export type productReducerType = typeof productsReducer
 export default productsReducer
