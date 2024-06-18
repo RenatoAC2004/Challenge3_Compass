@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
-import { RootState } from "../store"
+import { RootReducer } from "../store"
 import { useSelector } from "react-redux"
 import CartOverlay from "./CartOverlay"
 
@@ -10,7 +10,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
   const { userLoggedIn, signOut } = useAuth()
   const [showCartOverlay, setShowCartOverlay] = useState(false);
-  const cartItems = useSelector((state: RootState) => state.cart.items);
+  const cartItems = useSelector((state: RootReducer) => state.cart.items);
 
   const toggleCartOverlay = () => {
     setShowCartOverlay(!showCartOverlay);

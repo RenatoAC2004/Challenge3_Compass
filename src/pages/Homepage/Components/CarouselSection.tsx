@@ -4,9 +4,14 @@ import "../Styles/CarouselStyles.css"
 
 const CarouselSection = () => {
   return (
-    <section className="h-fit md:h-[41.875rem] flex flex-col bg-CarouselSectionBg font-poppins py-11 md:flex-row">
-      <div className="h-full flex flex-col justify-center items-center text-center pb-11 px-2 sm:px-10 
-      md:px-0 md:pb-0 md:pl-24 md:mr-10 md:items-start md:text-left md:1/2 lg:w-1/3 ">
+    <section
+      className="h-fit md:h-[41.875rem] flex flex-col bg-CarouselSectionBg font-poppins py-11 overflow-x-hidden 
+    md:flex-row"
+    >
+      <div
+        className="h-full flex flex-col justify-center items-center text-center pb-11 px-2 sm:px-10 
+      md:px-0 md:pb-0 md:pl-24 md:mr-10 md:items-start md:text-left md:1/2 lg:w-1/3 "
+      >
         <h1 className="font-bold text-4xl text-CardTitleColor pb-2">
           50+ Beautiful rooms inspiration
         </h1>
@@ -30,14 +35,14 @@ const CarouselSection = () => {
           loop={true}
           breakpoints={{
             768: {
-                slidesPerView: 1,
+              slidesPerView: 1,
             },
             1024: {
-                slidesPerView: 2,
+              slidesPerView: 2,
             },
-            1280:{
-                slidesPerView: 2.3,
-            }
+            1280: {
+              slidesPerView: 2.3,
+            },
           }}
         >
           <SwiperSlide className="flex justify-center pb-14 md:block md:justify-normal md:pb-0">

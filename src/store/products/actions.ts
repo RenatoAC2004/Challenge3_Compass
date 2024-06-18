@@ -1,5 +1,5 @@
 import axios from "axios"
-import { MyThunkDispatch  } from ".."
+import { MyThunkDispatch } from ".."
 import { ProductType } from "../../types/ProductType"
 import { GenericAction } from "../type"
 
@@ -21,20 +21,16 @@ export type ProductsActionTypes =
   | FetchProductsSuccessAction
   | FetchProductsFailureAction
 
-export type typeFetchProducts = typeof fetchProducts;
+export type typeFetchProducts = typeof fetchProducts
 
 export const fetchProducts = () => {
-   return async (
-    dispatch: MyThunkDispatch
-  ) => {
+  return async (dispatch: MyThunkDispatch) => {
     dispatch({ type: FETCH_PRODUCTS_REQUEST })
     try {
-      const response = await axios.get(
-        "https://run.mocky.io/v3/9456f580-16b7-4605-affb-c3f5286f8d80"
-      )
+      const response = await axios.get("http://localhost:3000/products")
       return dispatch({
         type: FETCH_PRODUCTS_SUCCESS,
-        payload: response.data.products,
+        payload: response.data,
       })
     } catch (error) {
       return dispatch({
