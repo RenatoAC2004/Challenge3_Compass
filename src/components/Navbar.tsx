@@ -9,12 +9,12 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { userLoggedIn, signOut } = useAuth()
-  const [showCartOverlay, setShowCartOverlay] = useState(false);
-  const cartItems = useSelector((state: RootReducer) => state.cart.items);
+  const [showCartOverlay, setShowCartOverlay] = useState(false)
+  const cartItems = useSelector((state: RootReducer) => state.cart.items)
 
   const toggleCartOverlay = () => {
-    setShowCartOverlay(!showCartOverlay);
-  };
+    setShowCartOverlay(!showCartOverlay)
+  }
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen)
@@ -144,20 +144,22 @@ const Navbar = () => {
         </div>
 
         <div className="flex gap-x-9 justify-center py-4">
-
-        {userLoggedIn ? (
-          <button onClick={signOut} className="ml-4">
-            Logout
-          </button>
-        ) : (
-          <Link to={"/login"} className="flex w-12 h-12 bg-white rounded-full items-center justify-center shadow-black shadow-sm transition-all
-          hover:bg-Golden">
-            <img
-              src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/UserIcon.svg"
-              alt="UserIcon"
-            />
-          </Link>
-        )}
+          {userLoggedIn ? (
+            <button onClick={signOut} className="ml-4">
+              Logout
+            </button>
+          ) : (
+            <Link
+              to={"/login"}
+              className="flex w-12 h-12 bg-white rounded-full items-center justify-center shadow-black shadow-sm transition-all
+          hover:bg-Golden"
+            >
+              <img
+                src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/UserIcon.svg"
+                alt="UserIcon"
+              />
+            </Link>
+          )}
           <button
             className="flex w-12 h-12 bg-white rounded-full items-center justify-center shadow-black shadow-sm transition-all
           hover:bg-Golden"
@@ -167,14 +169,11 @@ const Navbar = () => {
               alt="CartIcon"
             />
           </button>
-          {userLoggedIn && (
-            <button onClick={signOut} className="ml-4">
-              Logout
-            </button>
-          )}
         </div>
       </div>
-      {showCartOverlay && <CartOverlay items={cartItems} onClose={toggleCartOverlay} />}
+      {showCartOverlay && (
+        <CartOverlay items={cartItems} onClose={toggleCartOverlay} />
+      )}
     </header>
   )
 }
