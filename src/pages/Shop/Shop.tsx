@@ -3,18 +3,18 @@ import PagesTitles from "../../components/PagesTitles"
 import { selectProducts } from "../../store/products/reducer"
 import { fetchProducts } from "../../store/products/actions"
 import { useEffect, useState } from "react"
-import { UnknownAction } from "redux"
 import ProductCard from "../../components/ProductCard"
 import Services from "../../components/Services"
+import { MyThunkDispatch } from "../../store"
 
 const Shop = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<MyThunkDispatch>()
   const { products } = useSelector(selectProducts)
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(16)
 
   useEffect(() => {
-    dispatch(fetchProducts() as unknown as UnknownAction)
+    dispatch(fetchProducts())
   }, [dispatch])
 
   const indexOfLastItem = currentPage * itemsPerPage
