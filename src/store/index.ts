@@ -7,6 +7,7 @@ import storage from "redux-persist/lib/storage"
 import { persistReducer, persistStore } from "redux-persist"
 import { CartActionTypes } from "./cart/actions"
 import { ProductsActionTypes } from "./products/actions"
+import addressReducer from "./address/reducer"
 
 export type RootReducer = ReturnType<typeof rootReducer>
 export type MyThunkResult<R> = ThunkAction<R, RootReducer, object, Action>
@@ -14,7 +15,8 @@ export type MyThunkDispatch = ThunkDispatch<RootReducer, object, Action>
 
 const rootReducer = combineReducers({
   product: productsReducer,
-  cart: cartReducer
+  cart: cartReducer,
+  address: addressReducer
 })
 
 export type RootActions = ProductsActionTypes | CartActionTypes
