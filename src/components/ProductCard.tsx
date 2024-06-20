@@ -24,6 +24,10 @@ const ProductCard: React.FC<ProductTypeProps> = ({ data }) => {
     dispatch(addToCart(product))
   }
 
+  const handleActionButtonsClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.stopPropagation()
+  }
+
   return (
     <div className="flex flex-wrap gap-x-8 gap-y-8 justify-center">
       {data.map(product => (
@@ -76,21 +80,21 @@ const ProductCard: React.FC<ProductTypeProps> = ({ data }) => {
                 onClick={e => handleAddToCartClick(e, product)}
               />
               <div className="flex justify-between">
-                <button className="flex items-center text-white font-semibold gap-x-1 hover:underline">
+                <button className="flex items-center text-white font-semibold gap-x-1 hover:underline" onClick={handleActionButtonsClick}>
                   <img
                     src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/ShareIcon.svg"
                     alt="Share Icon"
                   />
                   <p>Share</p>
                 </button>
-                <button className="flex items-center text-white font-semibold gap-x-1 hover:underline">
+                <button className="flex items-center text-white font-semibold gap-x-1 hover:underline" onClick={handleActionButtonsClick}>
                   <img
                     src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/CompareIcon.svg"
                     alt="Compare Icon"
                   />
                   <p>Compare</p>
                 </button>
-                <button className="flex items-center text-white font-semibold gap-x-1 hover:underline">
+                <button className="flex items-center text-white font-semibold gap-x-1 hover:underline" onClick={handleActionButtonsClick}>
                   <img
                     src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/HeartIcon.svg"
                     alt="Heart Icon"

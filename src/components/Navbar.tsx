@@ -54,7 +54,7 @@ const Navbar = () => {
         <Link to="/">Home</Link>
         <Link to="/shop">Shop</Link>
         <Link to="/">About</Link>
-        <Link to="/">Contact</Link>
+        <Link to="/contact">Contact</Link>
       </div>
 
       <div className="hidden md:flex gap-x-9 pr-12">
@@ -135,7 +135,7 @@ const Navbar = () => {
             About
           </Link>
           <Link
-            to="/"
+            to="/contact"
             className="py-2 mx-2 border border-transparent rounded-md bg-white shadow-neutral-600 shadow-sm transition-all 
             hover:text-white hover:bg-Golden"
           >

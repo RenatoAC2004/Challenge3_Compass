@@ -7,6 +7,7 @@ import CheckoutPage from "../pages/Checkout/CheckoutPage";
 import LoginPage from "../pages/Login/LoginPage";
 import RegisterPage from "../pages/Register/RegisterPage";
 import ProtectedRoutes from "./protectedRoutes";
+import ContactPage from "../pages/Contact/ContactPage";
 
 export const MainRoutes = () => {
   return (
@@ -17,6 +18,7 @@ export const MainRoutes = () => {
       <Route path="/shop" element={<Shop />} />
       <Route path="/product/:productId" element={<SingleProductPage />} />
       <Route path="/cart" element={<CartPage />} />
+      <Route path="/contact" element={<ContactPage />} />
       <Route path="/checkout" element={<ProtectedRoutes element={<CheckoutPage />} />} />
     </Routes>
   );
