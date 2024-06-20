@@ -181,7 +181,7 @@ const LoginPage: React.FC = () => {
             ) : (
               <img
                 src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/FacebookLoginIcon.svg"
-                alt="Sign In Google"
+                alt="Sign In Facebook"
                 className="w-8"
               ></img>
             )}

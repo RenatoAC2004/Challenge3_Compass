@@ -6,20 +6,36 @@ import { useEffect, useState } from "react"
 import ProductCard from "../../components/ProductCard"
 import Services from "../../components/Services"
 import { MyThunkDispatch } from "../../store"
+import { ProductType } from "../../types/ProductType"
 
 const Shop = () => {
   const dispatch = useDispatch<MyThunkDispatch>()
   const { products } = useSelector(selectProducts)
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(16)
+  const [sortOption, setSortOption] = useState("default")
 
   useEffect(() => {
     dispatch(fetchProducts())
   }, [dispatch])
 
+  const sortProducts = (products: ProductType[], option: string): ProductType[] => {
+    switch (option) {
+      case "alphabetical":
+        return products.slice().sort((a, b) => a.name.localeCompare(b.name))
+      case "price-high-to-low":
+        return products.slice().sort((a, b) => b.price - a.price)
+      case "price-low-to-high":
+        return products.slice().sort((a, b) => a.price - b.price)
+      default:
+        return products
+    }
+  }
+
+  const sortedProducts = sortProducts(products, sortOption)
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
-  const currentItems = products.slice(indexOfFirstItem, indexOfLastItem)
+  const currentItems = sortedProducts.slice(indexOfFirstItem, indexOfLastItem)
   const visiblePages = []
   const totalPages = Math.ceil(products.length / itemsPerPage)
 
@@ -39,11 +55,13 @@ const Shop = () => {
     setCurrentPage(page)
   }
 
-  const handleItemsPerPageChange = (
-    e: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleItemsPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setItemsPerPage(parseInt(e.target.value))
     setCurrentPage(1)
+  }
+
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortOption(e.target.value)
   }
 
   for (let i = currentPage; i <= Math.min(currentPage + 2, totalPages); i++) {
@@ -110,9 +128,17 @@ const Shop = () => {
 
           <div className="flex items-center gap-x-4 flex-col sm:flex-row">
             <p>Sort by</p>
-            <div className="flex items-center justify-center pl-8 pr-20 lg:py-4 py-3 bg-white lg:text-xl text-FooterLightGray">
-              Default
-            </div>
+            <select
+              id="sortOption"
+              value={sortOption}
+              onChange={handleSortChange}
+              className="flex items-center justify-center px-4 py-3 bg-white lg:text-xl text-FooterLightGray"
+            >
+              <option value="default">Default</option>
+              <option value="alphabetical">Alphabetical</option>
+              <option value="price-high-to-low">Price: High to Low</option>
+              <option value="price-low-to-high">Price: Low to High</option>
+            </select>
           </div>
         </div>
       </div>

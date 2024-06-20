@@ -113,7 +113,7 @@ const SingleProductSection = () => {
           <p className="text-sm text-FooterLightGray">5 Customer Review</p>
         </div>
         <p className="pb-5 text-sm break-words max-w-[28rem]">
-          {product.description}
+          {product.about}
         </p>
         <div className="flex flex-col gap-y-1 pb-4">
           <p className="text-sm text-FooterLightGray">Size</p>
@@ -188,9 +188,9 @@ const SingleProductSection = () => {
             <p>:</p>
           </div>
           <div className="flex flex-col gap-y-3 ">
-            <p>SS001</p>
-            <p>Sofas</p>
-            <p>Sofa, Chair, Home, Shop</p>
+            <p>{product.sku}</p>
+            <p>{product.category}</p>
+            <p>{product.tags.join(", ")}</p>
             <div className="flex gap-x-6">
               <Link to="https://www.facebook.com/" target="_blank">
                 <img

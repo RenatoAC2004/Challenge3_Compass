@@ -54,12 +54,12 @@ const ProductCard: React.FC<ProductTypeProps> = ({ data }) => {
               </p>
             </div>
           )}
-          <img className="mb-4" src={product.imageUrl} alt={product.name} />
+          <img className="mb-4 bg-LighterBeige" src={product.imageUrl} alt={product.name} />
           <div className="flex flex-col gap-y-2 px-4 text-left">
             <p className="font-semibold text-2xl text-CardTitleColor">
               {product.name}
             </p>
-            <p className="text-CardTextColor truncate">{product.description}</p>
+            <p className="text-CardTextColor truncate">{product.subName}</p>
             <p className="flex gap-x-3 items-center text-CardTitleColor font-semibold text-xl">
               Rp {product.price.toLocaleString()}
               {product.discount !== 0 ? (
