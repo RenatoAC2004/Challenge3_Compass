@@ -1,9 +1,13 @@
 import { Link, useLocation } from "react-router-dom"
 import { ProductType } from "../../../types/ProductType"
+import { useDispatch } from "react-redux"
 import { useState } from "react"
+import { addToCart } from "../../../store/cart/actions"
+import { AppDispatch } from "../../../store"
 
 const SingleProductSection = () => {
   const location = useLocation()
+  const dispatch = useDispatch<AppDispatch>()
   const { product }: { product: ProductType } = location.state || {}
 
   const [quantity, setQuantity] = useState(1)
@@ -44,6 +48,16 @@ const SingleProductSection = () => {
       )
     }
     return stars
+  }
+
+  const handleAddToCartClick = () => {
+    if (quantity > 1) {
+      for (let i = 0; i < quantity; i++) {
+        dispatch(addToCart(product))
+      }
+    } else {
+      dispatch(addToCart(product))
+    }
   }
 
   return (
@@ -155,6 +169,7 @@ const SingleProductSection = () => {
           <button
             className="px-12 py-4 text-xl border border-black rounded-2xl bg-white transition-all
           hover:brightness-90 hover:shadow-lg"
+            onClick={handleAddToCartClick}
           >
             Add To Cart
           </button>

@@ -22,8 +22,8 @@ const CartOverlay: React.FC<CartOverlayProps> = ({ items, onClose }) => {
 
   return (
     <div className="fixed top-0 right-0 w-full h-full bg-black bg-opacity-20 flex justify-end z-50 font-poppins">
-      <div className="bg-white w-[26rem] relative h-full overflow-y-auto">
-        <div className="border-b px-7 pt-7">
+      <div className="bg-white w-[26rem] relative h-fit max-h-full overflow-y-auto">
+        <div className="border-b px-4 sm:px-7 pt-7">
           <div className="flex justify-between pb-6 border-b border-[#D9D9D9] mb-10">
             <h2 className="font-semibold text-2xl">Shopping Cart</h2>
             <button
@@ -80,7 +80,7 @@ const CartOverlay: React.FC<CartOverlayProps> = ({ items, onClose }) => {
             </>
           )}
         </div>
-        <div className="flex justify-between p-6 text-xs">
+        <div className="w-full flex flex-col text-center gap-y-3 sm:w-auto sm:flex-row justify-between p-6 text-xs">
           <Link
             to={"/cart"}
             className="px-7 py-1.5 border border-black rounded-full transition-all 

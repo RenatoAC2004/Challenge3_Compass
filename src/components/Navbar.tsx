@@ -163,6 +163,7 @@ const Navbar = () => {
           <button
             className="flex w-12 h-12 bg-white rounded-full items-center justify-center shadow-black shadow-sm transition-all
           hover:bg-Golden"
+            onClick={toggleCartOverlay}
           >
             <img
               src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/CartIcon.svg"
