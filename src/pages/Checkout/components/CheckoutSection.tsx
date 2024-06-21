@@ -36,7 +36,7 @@ const CheckoutSection = () => {
     ...initialFormData,
   })
 
-  // Função de formatação de CEP
+
   const formatZipCode = (value: string) => {
     const cleanedValue = value.replace(/\D/g, "")
     let formattedValue = cleanedValue
@@ -69,7 +69,7 @@ const CheckoutSection = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target
     if (id === "zipCode") {
-      formatZipCode(value) // Chama a função de formatação
+      formatZipCode(value)
     } else {
       setFormData(prevData => ({
         ...prevData,
