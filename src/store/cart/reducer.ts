@@ -1,5 +1,5 @@
 import { ProductType } from "../../types/ProductType"
-import { ADD_TO_CART, CartActionTypes, REMOVE_FROM_CART, UPDATE_CART_ITEM_QUANTITY } from "./actions"
+import { ADD_TO_CART, CartActionTypes, REMOVE_ALL_FROM_CART, REMOVE_FROM_CART, UPDATE_CART_ITEM_QUANTITY } from "./actions"
 
 export interface CartItem extends ProductType {
   quantity: number
@@ -60,6 +60,14 @@ const cartReducer = (state = initialState, action: CartActionTypes) => {
       } else {
         return state
       }
+    }
+
+    case REMOVE_ALL_FROM_CART: {
+      const updatedItems = state.items.filter(item => item.id !== action.payload.id);
+      return {
+        ...state,
+        items: updatedItems,
+      };
     }
 
     case UPDATE_CART_ITEM_QUANTITY: {

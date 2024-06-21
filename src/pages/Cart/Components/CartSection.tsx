@@ -4,6 +4,7 @@ import { AppDispatch, RootReducer } from "../../../store"
 import {
   updateCartItemQuantity,
   removeFromCart,
+  removeAllFromCart,
 } from "../../../store/cart/actions"
 import { CartItem } from "../../../store/cart/reducer"
 import { Link } from "react-router-dom"
@@ -25,6 +26,10 @@ const CartSection: React.FC = () => {
 
   const handleRemove = (item: CartItem) => {
     dispatch(removeFromCart(item))
+  }
+
+  const handleRemoveAll = (item: CartItem) => {
+    dispatch(removeAllFromCart(item))
   }
 
   return (
@@ -85,7 +90,7 @@ const CartSection: React.FC = () => {
                   <div>Rp {(item.price * item.quantity).toLocaleString()} </div>
                 </td>
                 <td>
-                  <button onClick={() => handleRemove(item)}>
+                  <button onClick={() => handleRemoveAll(item)}>
                     <img
                       src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/TrashIcon.svg"
                       alt="Trash Icon"

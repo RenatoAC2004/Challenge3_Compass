@@ -1,4 +1,10 @@
-import { createStore, applyMiddleware, combineReducers, Action, Reducer } from "redux"
+import {
+  createStore,
+  applyMiddleware,
+  combineReducers,
+  Action,
+  Reducer,
+} from "redux"
 import { thunk, ThunkAction, ThunkDispatch, ThunkMiddleware } from "redux-thunk"
 import productsReducer from "./products/reducer"
 import { composeWithDevTools } from "redux-devtools-extension"
@@ -8,6 +14,10 @@ import { persistReducer, persistStore } from "redux-persist"
 import { CartActionTypes } from "./cart/actions"
 import { ProductsActionTypes } from "./products/actions"
 import addressReducer from "./address/reducer"
+import formReducer from "./checkoutForm/reducer"
+import { FormActionTypes } from "./checkoutForm/actions"
+import contactFormReducer from "./contactForm/reducer"
+import { ContactFormActionTypes } from "./contactForm/actions"
 
 export type RootReducer = ReturnType<typeof rootReducer>
 export type MyThunkResult<R> = ThunkAction<R, RootReducer, object, Action>
@@ -16,17 +26,26 @@ export type MyThunkDispatch = ThunkDispatch<RootReducer, object, Action>
 const rootReducer = combineReducers({
   product: productsReducer,
   cart: cartReducer,
-  address: addressReducer
+  address: addressReducer,
+  form: formReducer,
+  contactForm: contactFormReducer,
 })
 
-export type RootActions = ProductsActionTypes | CartActionTypes
+export type RootActions =
+  | ProductsActionTypes
+  | CartActionTypes
+  | FormActionTypes
+  | ContactFormActionTypes
 
 const persistConfig = {
   key: "root",
   storage,
-};
+}
 
-const persistedReducer = persistReducer(persistConfig, rootReducer as unknown as Reducer);
+const persistedReducer = persistReducer(
+  persistConfig,
+  rootReducer as unknown as Reducer
+)
 
 const store = createStore(
   persistedReducer,
@@ -35,6 +54,6 @@ const store = createStore(
   )
 )
 
-export const persistor = persistStore(store);
-export type AppDispatch = typeof store.dispatch;
+export const persistor = persistStore(store)
+export type AppDispatch = typeof store.dispatch
 export default store

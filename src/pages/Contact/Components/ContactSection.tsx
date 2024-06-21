@@ -1,17 +1,67 @@
+import { useDispatch } from "react-redux"
 import FormInputs from "../../../components/FormInputs"
+import { useState } from "react"
+import { saveContactFormData } from "../../../store/contactForm/actions"
+import { AppDispatch } from "../../../store"
+import {
+  FormErrors,
+  validateContactForm,
+} from "../../../utils/validateContactForm"
+import ConfirmationModal from "../../../components/ConfirmationModal"
 
 const ContactSection = () => {
+  const dispatch = useDispatch<AppDispatch>()
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false)
+
+  const initialFormData = {
+    yourName: "",
+    email: "",
+    subject: "",
+    message: "",
+  }
+
+  const [formData, setFormData] = useState(initialFormData)
+
+  const [formErrors, setFormErrors] = useState<FormErrors>({})
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { id, value } = e.target
+    setFormData(prevData => ({
+      ...prevData,
+      [id]: value,
+    }))
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    console.log(formData)
+    const errors = validateContactForm(formData)
+    setFormErrors(errors)
+
+    if (Object.keys(errors).length === 0) {
+      dispatch(saveContactFormData(formData))
+      setShowConfirmationModal(true)
+    }
+  }
+
+  const handleModalClose = () => {
+    setShowConfirmationModal(false)
+    setFormData(initialFormData)
+  }
+
   return (
     <section className="flex flex-col pt-[6.25rem] px-4 sm:px-8 lg:px-24 xl:px-[12.5rem] font-poppins">
       <div className="max-w-[40.625rem] self-center">
-      <h1 className="font-semibold text-4xl text-center pb-2">
-        Get In Touch With Us
-      </h1>
-      <p className="text-FooterLightGray text-justify sm:text-center">
-        For More Information About Our Product & Services. Please Feel Free To
-        Drop Us An Email. Our Staff Always Be There To Help You Out. Do Not
-        Hesitate!
-      </p>
+        <h1 className="font-semibold text-4xl text-center pb-2">
+          Get In Touch With Us
+        </h1>
+        <p className="text-FooterLightGray text-justify sm:text-center">
+          For More Information About Our Product & Services. Please Feel Free To
+          Drop Us An Email. Our Staff Always Be There To Help You Out. Do Not
+          Hesitate!
+        </p>
       </div>
       <div className="w-full flex flex-col md:flex-row md:pt-28 lg:justify-between 2xl:justify-center">
         <div
@@ -60,38 +110,67 @@ const ContactSection = () => {
             </div>
           </div>
         </div>
-        <form className="w-full lg:max-w-[40rem]">
+        <form className="w-full lg:max-w-[40rem]" onSubmit={handleSubmit}>
           <div className="flex flex-col sm:px-[3.25rem] pt-28 pb-16 gap-y-9 md:pr-0 md:w-full md:pt-0 xl:pr-[3.25rem]">
             <FormInputs
               label="Your name"
               id="yourName"
               placeholder="Abc"
+              value={formData.yourName}
+              onChange={handleInputChange}
+              error={formErrors.yourName}
             ></FormInputs>
             <FormInputs
               label="Email address"
               id="email"
               placeholder="Abc@def.com"
+              value={formData.email}
+              onChange={handleInputChange}
+              error={formErrors.email}
             ></FormInputs>
             <FormInputs
               label="Subject"
               id="subject"
               placeholder="This is an optional"
+              value={formData.subject}
+              onChange={handleInputChange}
+              error={formErrors.subject}
             ></FormInputs>
             <label htmlFor="message" className="font-medium">
               Message
             </label>
-            <textarea
-              id="message"
-              name="message"
-              placeholder="Hi! i'd like to ask about"
-              className="bg-white border border-FooterLightGray w-full rounded-xl py-6 px-5 resize-none h-[7.5rem]"
-            />
+            <div className="flex flex-col gap-y-5">
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Hi! i'd like to ask about"
+                value={formData.message}
+                onChange={handleInputChange}
+                className={`bg-white border ${
+                  formErrors.message
+                    ? "border-red-500"
+                    : "border-FooterLightGray"
+                } w-full rounded-xl py-6 px-5 resize-none h-[7.5rem]`}
+              />
+              {formErrors.message && (
+                <span className="text-red-500 text-sm">
+                  {formErrors.message}
+                </span>
+              )}
+            </div>
             <button className="bg-Golden px-[5.625rem] py-3.5 rounded-md text-white w-fit mt-4 self-center md:self-start">
               Submit
             </button>
           </div>
         </form>
       </div>
+      <ConfirmationModal
+        isOpen={showConfirmationModal}
+        onClose={handleModalClose}
+        title="Form Submission Successful"
+        message="Thank you for your submission!"
+        buttonText="Close"
+      />
     </section>
   )
 }
