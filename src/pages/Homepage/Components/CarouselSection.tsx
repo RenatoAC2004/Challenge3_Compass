@@ -46,10 +46,26 @@ const CarouselSection = () => {
           }}
         >
           <SwiperSlide className="flex justify-center pb-14 md:block md:justify-normal md:pb-0">
-            <img
-              src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/images/homepage/carousel/CarouselBedroom.png"
-              alt="Carousel Bedroom Image"
-            />
+            <div className="relative">
+              <img
+                src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/images/homepage/carousel/CarouselBedroom.png"
+                alt="Carousel Bedroom Image"
+              />
+              <div className="absolute left-6 bottom-6">
+                <div className="flex">
+                  <div className=" p-8  bg-white opacity-75">
+                    <p className="font-medium">01 - Bed Room</p>
+                    <p className="text-2xl font-semibold xl:text-3xl">Inner Peace</p>
+                  </div>
+                  <div className="flex justify-center items-center w-12 h-12 bg-Golden self-end">
+                    <img
+                      src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/CarouselArrowIcon.svg"
+                      alt="Arrow Icon"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </SwiperSlide>
           <SwiperSlide className="flex justify-center pb-14 md:block md:justify-normal md:pb-0">
             <img

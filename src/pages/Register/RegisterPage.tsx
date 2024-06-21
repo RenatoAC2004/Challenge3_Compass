@@ -180,7 +180,14 @@ const RegisterPage: React.FC = () => {
             hover:bg-[#ebebeb]"
           >
             {loading ? (
-              "Loading..."
+              <div className="flex justify-center items-center gap-x-2">
+                <img
+                  src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/SpinnerIcon.svg"
+                  alt="Spinner Icon"
+                  className="animate-spin fill-white"
+                />
+                <p>Loading</p>
+              </div>
             ) : (
               <img
                 src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/GoogleIcon.svg"
@@ -196,11 +203,18 @@ const RegisterPage: React.FC = () => {
             hover:bg-[#ebebeb]"
           >
             {loading ? (
-              "Loading..."
+              <div className="flex justify-center items-center gap-x-2">
+                <img
+                  src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/SpinnerIcon.svg"
+                  alt="Spinner Icon"
+                  className="animate-spin fill-white"
+                />
+                <p>Loading</p>
+              </div>
             ) : (
               <img
                 src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/FacebookLoginIcon.svg"
-                alt="Sign In Google"
+                alt="Sign In Facebook"
                 className="w-8"
               ></img>
             )}

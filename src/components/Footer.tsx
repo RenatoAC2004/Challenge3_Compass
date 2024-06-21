@@ -3,10 +3,21 @@ import { Link } from "react-router-dom"
 
 const Footer = () => {
   const [email, setEmail] = useState("")
+  const [error, setError] = useState("")
+
+  const isValidEmail = /\S+@\S+\.\S+/.test(email)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
+    if (!isValidEmail) {
+      setError("Please enter a valid email address")
+      return
+    }
+
+    localStorage.setItem("subscribedEmail", email)
+    setEmail("")
+    setError("")
   }
 
   return (
@@ -109,10 +120,11 @@ const Footer = () => {
             <input
               type="email"
               placeholder="Enter Your Email Address"
-              className="border-b border-black text-sm xl:w-52"
+              className={`border-b ${
+                error ? "border-red-500" : "border-black"
+              } text-sm xl:w-52`}
               value={email}
               onChange={e => setEmail(e.target.value)}
-              required
             />
             <button
               type="submit"
@@ -122,6 +134,7 @@ const Footer = () => {
               SUBSCRIBE
             </button>
           </div>
+          {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
         </form>
       </div>
       <p className="pt-9 pb-9 text-center md:pb-0 md:text-left">

@@ -7,6 +7,7 @@ import ProductCard from "../../components/ProductCard"
 import Services from "../../components/Services"
 import { MyThunkDispatch } from "../../store"
 import { ProductType } from "../../types/ProductType"
+import FilterModal from "./Components/FilterModal"
 
 const Shop = () => {
   const dispatch = useDispatch<MyThunkDispatch>()
@@ -14,12 +15,55 @@ const Shop = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(16)
   const [sortOption, setSortOption] = useState("default")
+  const [showFilterPopup, setShowFilterPopup] = useState(false)
+  const [appliedFilter, setAppliedFilter] = useState<string | null>(null)
+
+  const openFilterPopup = () => {
+    setShowFilterPopup(true)
+  }
+
+  const closeFilterPopup = () => {
+    setShowFilterPopup(false)
+  }
+
+  const applyFilter = (filterOption: string) => {
+    setAppliedFilter(filterOption)
+    closeFilterPopup()
+  }
 
   useEffect(() => {
     dispatch(fetchProducts())
   }, [dispatch])
 
-  const sortProducts = (products: ProductType[], option: string): ProductType[] => {
+  const filterProducts = (
+    products: ProductType[],
+    filter: string | null
+  ): ProductType[] => {
+    if (!filter || filter === "reset") return products
+
+    return products.filter(product => {
+      switch (filter) {
+        case "discounted":
+          return product.discount > 0
+        case "new":
+          return product.new === true
+        default:
+          if (filter.startsWith("price:")) {
+            const [minPrice, maxPrice] = filter
+              .replace("price:", "")
+              .split("-")
+              .map(Number)
+            return product.price >= minPrice && product.price <= maxPrice
+          }
+          return true
+      }
+    })
+  }
+
+  const sortProducts = (
+    products: ProductType[],
+    option: string
+  ): ProductType[] => {
     switch (option) {
       case "alphabetical":
         return products.slice().sort((a, b) => a.name.localeCompare(b.name))
@@ -32,16 +76,17 @@ const Shop = () => {
     }
   }
 
-  const sortedProducts = sortProducts(products, sortOption)
+  const filteredProducts = filterProducts(products, appliedFilter)
+  const sortedProducts = sortProducts(filteredProducts, sortOption)
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
   const currentItems = sortedProducts.slice(indexOfFirstItem, indexOfLastItem)
   const visiblePages = []
-  const totalPages = Math.ceil(products.length / itemsPerPage)
+  const totalPages = Math.ceil(sortedProducts.length / itemsPerPage)
 
   const firstResult = (currentPage - 1) * itemsPerPage + 1
-  const lastResult = Math.min(currentPage * itemsPerPage, products.length)
-  const totalResults = products.length
+  const lastResult = Math.min(currentPage * itemsPerPage, sortedProducts.length)
+  const totalResults = sortedProducts.length
 
   const nextPage = () => {
     setCurrentPage(prevPage => Math.min(prevPage + 1, totalPages))
@@ -55,7 +100,9 @@ const Shop = () => {
     setCurrentPage(page)
   }
 
-  const handleItemsPerPageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleItemsPerPageChange = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     setItemsPerPage(parseInt(e.target.value))
     setCurrentPage(1)
   }
@@ -86,12 +133,17 @@ const Shop = () => {
       bg-LighterBeige flex flex-col justify-center items-center px-4 lg:px-[6.25rem] font-poppins"
       >
         <div className="w-full flex items-center justify-center lg:justify-normal">
-          <img
-            src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/FilterIcon.svg"
-            alt="Filter Icon"
-            className="pr-3"
-          />
-          <p className="text-xl">Filter</p>
+          <button
+            className="flex justify-center items-center"
+            onClick={openFilterPopup}
+          >
+            <img
+              src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/FilterIcon.svg"
+              alt="Filter Icon"
+              className="pr-3"
+            />
+            <p className="text-xl">Filter</p>
+          </button>
 
           <img
             src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/GridCirclesIcon.svg"
@@ -167,6 +219,12 @@ const Shop = () => {
           Next
         </button>
       </div>
+
+      {showFilterPopup && (
+        <div className="filter-overlay">
+          <FilterModal onClose={closeFilterPopup} onApplyFilter={applyFilter} />
+        </div>
+      )}
 
       <Services />
     </>

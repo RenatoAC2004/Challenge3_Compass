@@ -143,7 +143,18 @@ const LoginPage: React.FC = () => {
             className="w-full py-4 px-8 bg-Golden text-white rounded-xl text-lg font-medium 
             transition-all hover:shadow-lg hover:brightness-110"
           >
-            {loading ? "Loading..." : "Sign In"}
+            {loading ? (
+              <div className="flex justify-center items-center gap-x-2">
+                <img
+                  src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/SpinnerIcon.svg"
+                  alt="Spinner Icon"
+                  className="animate-spin fill-white"
+                />
+                <p>Loading</p>
+              </div>
+            ) : (
+              "Sign In"
+            )}
           </button>
         </form>
 
@@ -161,7 +172,14 @@ const LoginPage: React.FC = () => {
             hover:bg-[#ebebeb]"
           >
             {loading ? (
-              "Loading..."
+              <div className="flex justify-center items-center gap-x-2">
+                <img
+                  src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/SpinnerIcon.svg"
+                  alt="Spinner Icon"
+                  className="animate-spin fill-white"
+                />
+                <p>Loading</p>
+              </div>
             ) : (
               <img
                 src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/GoogleIcon.svg"
@@ -177,7 +195,14 @@ const LoginPage: React.FC = () => {
             hover:bg-[#ebebeb]"
           >
             {loading ? (
-              "Loading..."
+              <div className="flex justify-center items-center gap-x-2">
+                <img
+                  src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/SpinnerIcon.svg"
+                  alt="Spinner Icon"
+                  className="animate-spin fill-white"
+                />
+                <p>Loading</p>
+              </div>
             ) : (
               <img
                 src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/FacebookLoginIcon.svg"

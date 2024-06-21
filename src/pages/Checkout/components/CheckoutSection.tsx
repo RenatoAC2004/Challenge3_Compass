@@ -13,8 +13,8 @@ const CheckoutSection = () => {
   const address = useSelector((state: RootReducer) => state.address.address)
   const cartItems = useSelector((state: RootReducer) => state.cart.items)
   const [showConfirmationModal, setShowConfirmationModal] = useState(false)
-
   const [zipCodeValue, setZipCodeValue] = useState("")
+  const [formattedZipCode, setFormattedZipCode] = useState("")
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
     useState("directBankTransfer")
 
@@ -28,12 +28,24 @@ const CheckoutSection = () => {
     province: "",
     zipCode: "",
     addOnAddress: "",
+    additionalInformation: "",
   }
 
   const [formData, setFormData] = useState(initialFormData)
   const [formErrors, setFormErrors] = useState<FormErrors>({
     ...initialFormData,
   })
+
+  // Função de formatação de CEP
+  const formatZipCode = (value: string) => {
+    const cleanedValue = value.replace(/\D/g, "")
+    let formattedValue = cleanedValue
+    if (cleanedValue.length > 5) {
+      formattedValue = `${cleanedValue.slice(0, 5)}-${cleanedValue.slice(5)}`
+    }
+    setFormattedZipCode(formattedValue)
+    setZipCodeValue(cleanedValue)
+  }
 
   useEffect(() => {
     if (zipCodeValue.length === 8) {
@@ -56,10 +68,14 @@ const CheckoutSection = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target
-    setFormData(prevData => ({
-      ...prevData,
-      [id]: value,
-    }))
+    if (id === "zipCode") {
+      formatZipCode(value) // Chama a função de formatação
+    } else {
+      setFormData(prevData => ({
+        ...prevData,
+        [id]: value,
+      }))
+    }
   }
 
   const handlePaymentMethodChange = (method: string) => {
@@ -119,9 +135,9 @@ const CheckoutSection = () => {
             <FormInputs
               label="ZIP code"
               id="zipCode"
-              type="number"
-              value={zipCodeValue}
-              onChange={e => setZipCodeValue(e.target.value)}
+              type="text"
+              value={formattedZipCode}
+              onChange={handleInputChange}
               error={formErrors.zipCode}
             />
             <FormInputs
@@ -170,6 +186,7 @@ const CheckoutSection = () => {
               id="additionalInformation"
               placeholder="Additional Information"
               onChange={handleInputChange}
+              error={formErrors.additionalInformation}
             />
           </div>
         </div>
@@ -224,7 +241,7 @@ const CheckoutSection = () => {
               </label>
             </div>
             {selectedPaymentMethod === "directBankTransfer" && (
-              <p className="font-light text-FooterLightGray">
+              <p className="font-light text-FooterLightGray text-justify">
                 Make your payment directly into our bank account. Please use
                 your Order ID as the payment reference. Your order will not be
                 shipped until the funds have cleared in our account.
@@ -245,7 +262,7 @@ const CheckoutSection = () => {
               </label>
             </div>
             {selectedPaymentMethod === "directBankTransfer2" && (
-              <p className="font-light text-FooterLightGray">
+              <p className="font-light text-FooterLightGray text-justify">
                 Make your payment directly into our bank account. Please use
                 your Order ID as the payment reference. Your order will not be
                 shipped until the funds have cleared in our account.
