@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootReducer } from "../../../store"
 import {
   updateCartItemQuantity,
-  removeFromCart,
   removeAllFromCart,
 } from "../../../store/cart/actions"
 import { CartItem } from "../../../store/cart/reducer"
@@ -22,10 +21,6 @@ const CartSection: React.FC = () => {
       newQuantity = 1
     }
     dispatch(updateCartItemQuantity(item.id, newQuantity))
-  }
-
-  const handleRemove = (item: CartItem) => {
-    dispatch(removeFromCart(item))
   }
 
   const handleRemoveAll = (item: CartItem) => {
@@ -173,7 +168,7 @@ const CartSection: React.FC = () => {
                 <button
                   className="flex gap-x-2 w-fit self-center p-2 border rounded-xl shadow-md transition-colors sm:self-auto
                 hover:border-black"
-                  onClick={() => handleRemove(item)}
+                  onClick={() => handleRemoveAll(item)}
                 >
                   Remove Product{" "}
                   <img
