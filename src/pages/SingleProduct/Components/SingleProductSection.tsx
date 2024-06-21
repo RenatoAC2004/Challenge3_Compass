@@ -1,9 +1,13 @@
 import { Link, useLocation } from "react-router-dom"
 import { ProductType } from "../../../types/ProductType"
+import { useDispatch } from "react-redux"
 import { useState } from "react"
+import { addToCart } from "../../../store/cart/actions"
+import { AppDispatch } from "../../../store"
 
 const SingleProductSection = () => {
   const location = useLocation()
+  const dispatch = useDispatch<AppDispatch>()
   const { product }: { product: ProductType } = location.state || {}
 
   const [quantity, setQuantity] = useState(1)
@@ -44,6 +48,16 @@ const SingleProductSection = () => {
       )
     }
     return stars
+  }
+
+  const handleAddToCartClick = () => {
+    if (quantity > 1) {
+      for (let i = 0; i < quantity; i++) {
+        dispatch(addToCart(product))
+      }
+    } else {
+      dispatch(addToCart(product))
+    }
   }
 
   return (
@@ -99,7 +113,7 @@ const SingleProductSection = () => {
           <p className="text-sm text-FooterLightGray">5 Customer Review</p>
         </div>
         <p className="pb-5 text-sm break-words max-w-[28rem]">
-          {product.description}
+          {product.about}
         </p>
         <div className="flex flex-col gap-y-1 pb-4">
           <p className="text-sm text-FooterLightGray">Size</p>
@@ -155,6 +169,7 @@ const SingleProductSection = () => {
           <button
             className="px-12 py-4 text-xl border border-black rounded-2xl bg-white transition-all
           hover:brightness-90 hover:shadow-lg"
+            onClick={handleAddToCartClick}
           >
             Add To Cart
           </button>
@@ -173,9 +188,9 @@ const SingleProductSection = () => {
             <p>:</p>
           </div>
           <div className="flex flex-col gap-y-3 ">
-            <p>SS001</p>
-            <p>Sofas</p>
-            <p>Sofa, Chair, Home, Shop</p>
+            <p>{product.sku}</p>
+            <p>{product.category}</p>
+            <p>{product.tags.join(", ")}</p>
             <div className="flex gap-x-6">
               <Link to="https://www.facebook.com/" target="_blank">
                 <img

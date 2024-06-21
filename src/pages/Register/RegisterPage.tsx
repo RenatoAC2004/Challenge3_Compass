@@ -5,6 +5,7 @@ import {
   doSignInWithGoogle,
 } from "../../firebase/auth"
 import { Link, useNavigate } from "react-router-dom"
+import ConfirmationModal from "../../components/ConfirmationModal"
 
 const RegisterPage: React.FC = () => {
   const [email, setEmail] = useState("")
@@ -179,7 +180,14 @@ const RegisterPage: React.FC = () => {
             hover:bg-[#ebebeb]"
           >
             {loading ? (
-              "Loading..."
+              <div className="flex justify-center items-center gap-x-2">
+                <img
+                  src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/SpinnerIcon.svg"
+                  alt="Spinner Icon"
+                  className="animate-spin fill-white"
+                />
+                <p>Loading</p>
+              </div>
             ) : (
               <img
                 src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/GoogleIcon.svg"
@@ -195,42 +203,31 @@ const RegisterPage: React.FC = () => {
             hover:bg-[#ebebeb]"
           >
             {loading ? (
-              "Loading..."
+              <div className="flex justify-center items-center gap-x-2">
+                <img
+                  src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/SpinnerIcon.svg"
+                  alt="Spinner Icon"
+                  className="animate-spin fill-white"
+                />
+                <p>Loading</p>
+              </div>
             ) : (
               <img
                 src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/FacebookLoginIcon.svg"
-                alt="Sign In Google"
+                alt="Sign In Facebook"
                 className="w-8"
               ></img>
             )}
           </button>
         </div>
       </div>
-      {showConfirmationModal && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-            <div className="flex gap-x-2 justify-center pb-9">
-              <img
-                src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/LogoIcon.svg"
-                alt="Logo"
-              />
-              <p className="font-montserrat font-bold text-6xl">Furniro</p>
-            </div>
-            <p className="text-lg font-semibold mb-4">
-              Registration successful!
-            </p>
-            <p className="text-sm pb-9">
-              Your account has been created successfully.
-            </p>
-            <button
-              onClick={handleConfirmation}
-              className="bg-Golden text-white px-4 py-2 rounded-lg font-medium transition-all hover:opacity-80"
-            >
-              Proceed to home
-            </button>
-          </div>
-        </div>
-      )}
+      <ConfirmationModal
+        isOpen={showConfirmationModal}
+        onClose={handleConfirmation}
+        title="Registration successful!"
+        message="Your account has been created successfully."
+        buttonText="Proceed to home"
+      />
     </div>
   )
 }

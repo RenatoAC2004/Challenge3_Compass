@@ -6,26 +6,87 @@ import { useEffect, useState } from "react"
 import ProductCard from "../../components/ProductCard"
 import Services from "../../components/Services"
 import { MyThunkDispatch } from "../../store"
+import { ProductType } from "../../types/ProductType"
+import FilterModal from "./Components/FilterModal"
 
 const Shop = () => {
   const dispatch = useDispatch<MyThunkDispatch>()
   const { products } = useSelector(selectProducts)
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(16)
+  const [sortOption, setSortOption] = useState("default")
+  const [showFilterPopup, setShowFilterPopup] = useState(false)
+  const [appliedFilter, setAppliedFilter] = useState<string | null>(null)
+
+  const openFilterPopup = () => {
+    setShowFilterPopup(true)
+  }
+
+  const closeFilterPopup = () => {
+    setShowFilterPopup(false)
+  }
+
+  const applyFilter = (filterOption: string) => {
+    setAppliedFilter(filterOption)
+    closeFilterPopup()
+  }
 
   useEffect(() => {
     dispatch(fetchProducts())
   }, [dispatch])
 
+  const filterProducts = (
+    products: ProductType[],
+    filter: string | null
+  ): ProductType[] => {
+    if (!filter || filter === "reset") return products
+
+    return products.filter(product => {
+      switch (filter) {
+        case "discounted":
+          return product.discount > 0
+        case "new":
+          return product.new === true
+        default:
+          if (filter.startsWith("price:")) {
+            const [minPrice, maxPrice] = filter
+              .replace("price:", "")
+              .split("-")
+              .map(Number)
+            return product.price >= minPrice && product.price <= maxPrice
+          }
+          return true
+      }
+    })
+  }
+
+  const sortProducts = (
+    products: ProductType[],
+    option: string
+  ): ProductType[] => {
+    switch (option) {
+      case "alphabetical":
+        return products.slice().sort((a, b) => a.name.localeCompare(b.name))
+      case "price-high-to-low":
+        return products.slice().sort((a, b) => b.price - a.price)
+      case "price-low-to-high":
+        return products.slice().sort((a, b) => a.price - b.price)
+      default:
+        return products
+    }
+  }
+
+  const filteredProducts = filterProducts(products, appliedFilter)
+  const sortedProducts = sortProducts(filteredProducts, sortOption)
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
-  const currentItems = products.slice(indexOfFirstItem, indexOfLastItem)
+  const currentItems = sortedProducts.slice(indexOfFirstItem, indexOfLastItem)
   const visiblePages = []
-  const totalPages = Math.ceil(products.length / itemsPerPage)
+  const totalPages = Math.ceil(sortedProducts.length / itemsPerPage)
 
   const firstResult = (currentPage - 1) * itemsPerPage + 1
-  const lastResult = Math.min(currentPage * itemsPerPage, products.length)
-  const totalResults = products.length
+  const lastResult = Math.min(currentPage * itemsPerPage, sortedProducts.length)
+  const totalResults = sortedProducts.length
 
   const nextPage = () => {
     setCurrentPage(prevPage => Math.min(prevPage + 1, totalPages))
@@ -44,6 +105,10 @@ const Shop = () => {
   ) => {
     setItemsPerPage(parseInt(e.target.value))
     setCurrentPage(1)
+  }
+
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortOption(e.target.value)
   }
 
   for (let i = currentPage; i <= Math.min(currentPage + 2, totalPages); i++) {
@@ -68,12 +133,17 @@ const Shop = () => {
       bg-LighterBeige flex flex-col justify-center items-center px-4 lg:px-[6.25rem] font-poppins"
       >
         <div className="w-full flex items-center justify-center lg:justify-normal">
-          <img
-            src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/FilterIcon.svg"
-            alt="Filter Icon"
-            className="pr-3"
-          />
-          <p className="text-xl">Filter</p>
+          <button
+            className="flex justify-center items-center"
+            onClick={openFilterPopup}
+          >
+            <img
+              src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/FilterIcon.svg"
+              alt="Filter Icon"
+              className="pr-3"
+            />
+            <p className="text-xl">Filter</p>
+          </button>
 
           <img
             src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/GridCirclesIcon.svg"
@@ -110,9 +180,17 @@ const Shop = () => {
 
           <div className="flex items-center gap-x-4 flex-col sm:flex-row">
             <p>Sort by</p>
-            <div className="flex items-center justify-center pl-8 pr-20 lg:py-4 py-3 bg-white lg:text-xl text-FooterLightGray">
-              Default
-            </div>
+            <select
+              id="sortOption"
+              value={sortOption}
+              onChange={handleSortChange}
+              className="flex items-center justify-center px-4 py-3 bg-white lg:text-xl text-FooterLightGray"
+            >
+              <option value="default">Default</option>
+              <option value="alphabetical">Alphabetical</option>
+              <option value="price-high-to-low">Price: High to Low</option>
+              <option value="price-low-to-high">Price: Low to High</option>
+            </select>
           </div>
         </div>
       </div>
@@ -141,6 +219,12 @@ const Shop = () => {
           Next
         </button>
       </div>
+
+      {showFilterPopup && (
+        <div className="filter-overlay">
+          <FilterModal onClose={closeFilterPopup} onApplyFilter={applyFilter} />
+        </div>
+      )}
 
       <Services />
     </>
