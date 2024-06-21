@@ -14,6 +14,10 @@ const PagesTitles: React.FC<PagesTitlesProps> = ({ currentPage }) => {
         className="w-full h-full object-cover object-left"
       />
       <div className="absolute flex flex-col items-center gap-y-2">
+      <img
+          src="https://furniro-images-s3.s3.us-east-2.amazonaws.com/icons/LogoIcon.svg"
+          alt="Logo"
+        />
         <h1 className="font-medium text-5xl">{currentPage}</h1>
         <p className="flex justify-center items-center gap-x-1.5">
           <Link to="/" className="font-semibold hover:underline">Home</Link> <span className="font-semibold text-xl">{">"}</span> {currentPage}
